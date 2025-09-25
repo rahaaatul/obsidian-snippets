@@ -1,21 +1,22 @@
 :root table {
   border-collapse: separate;
   border-spacing: 0;
-  --table-header-weight:bold;
+  --table-header-weight: bold;
 }
 
 th:first-of-type {
   border-top-left-radius: 10px;
-  background-color: var(--background-secondary);
 }
+
 th:last-of-type {
   border-top-right-radius: 10px;
-  background-color: var(--background-secondary);
 }
+
 tr:last-of-type td:first-of-type {
   border-bottom-left-radius: 10px;
 
 }
+
 tr:last-of-type td:last-of-type {
   border-bottom-right-radius: 10px;
 }
@@ -28,30 +29,44 @@ thead {
   background-color: var(--background-secondary);
 }
 
+td,
+th {
+  padding: 5px !important;
+  text-align: center !important;
+}
+
 /* @settings
 name: Table Styling
 id: table-styling
 settings:
   - id: center-all-cells
     title: Center all table cells
-    description: Toggle to enable or disable centering the content of all table cells
+    description: Enable or disable centering the content of all table cells
+    type: class-toggle
+    default: true
+  - id: header-column
+    title: Header Column
+    description: Enable or disable header column
+    type: class-toggle
+    default: false
+  - id: full-width
+    title: Full Width Table
+    description: Enable or disable full width table
     type: class-toggle
     default: true
 */
 
-body.center-all-cells .markdown-preview-view table thead tr th,
-body.center-all-cells .markdown-rendered table thead tr th,
-body.center-all-cells .markdown-preview-view table tr td,
-body.center-all-cells .markdown-rendered table tr td {
+body.center-all-cells .markdown-preview-view table thead tbody td tr th,
+body.center-all-cells .markdown-rendered table thead tbody td tr th {
   text-align: center;
 }
 
+body.header-column .markdown-preview-view table tr td:first-of-type,
+body.header-column .markdown-rendered table tr td:first-of-type {
+  background-color: var(--background-secondary);
+}
 
-
-
-
-
-
-
-
-
+body.full-width .markdown-source-view.mod-cm6 .cm-table-widget .table-wrapper,
+body.full-width :is(.markdown-rendered, .markdown-source-view.mod-cm6.is-live-preview) table {
+  width: 100%
+}
