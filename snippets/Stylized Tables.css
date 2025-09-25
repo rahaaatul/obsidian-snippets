@@ -35,17 +35,23 @@ thead {
 name: Table Styling
 id: table-styling
 settings:
+  - id: full-width
+    title: Full Width Table
+    description: Makes tables span the full width of the note.
+    type: class-toggle
+    default: true
+
   - id: center-all-cells
     title: Center all table cells
     description: Horizontally centers the text in all table cells.
     type: class-toggle
     default: true
 
-  - id: full-width
-    title: Full Width Table
-    description: Makes tables span the full width of the note.
+  - id: zebra-striping
+    title: Zebra Striping
+    description: Adds alternating background colors to table rows for better readability.
     type: class-toggle
-    default: true
+    default: false
 
   - id: header-column
     title: Header Column
@@ -53,9 +59,9 @@ settings:
     type: class-toggle
     default: false
 
-  - id: zebra-striping
-    title: Zebra Striping
-    description: Adds alternating background colors to table rows for better readability.
+  - id: no-inner-borders
+    title: No Inner Borders
+    description: Removes the inner borders between table cells.
     type: class-toggle
     default: false
 
@@ -77,6 +83,7 @@ body.center-all-cells :is(.markdown-preview-view, .markdown-rendered) table :is(
 
 body.header-column :is(.markdown-preview-view, .markdown-rendered) table tr :is(td:first-of-type) {
   background-color: var(--background-secondary) !important;
+  font-weight: bold;
 }
 
 body.full-width :is(.markdown-source-view.mod-cm6 .cm-table-widget .table-wrapper,
@@ -90,4 +97,17 @@ body.zebra-striping :is(.markdown-preview-view, .markdown-rendered) table tr:nth
 
 :is(.markdown-preview-view, .markdown-rendered) table :is(td, th) {
   padding: var(--table-cell-padding) !important;
+}
+
+body.no-inner-borders :is(.markdown-preview-view, .markdown-rendered) table :is(td, th) {
+  border-bottom-width: 0 !important;
+  border-right-width: 0 !important;
+}
+
+body.no-inner-borders :is(.markdown-preview-view, .markdown-rendered) table tr :is(td:last-of-type, th:last-of-type) {
+  border-right-width: var(--table-border-width) !important;
+}
+
+body.no-inner-borders :is(.markdown-preview-view, .markdown-rendered) table tr:last-of-type td {
+  border-bottom-width: var(--table-border-width) !important;
 }
