@@ -29,11 +29,7 @@ thead {
   background-color: var(--background-secondary);
 }
 
-td,
-th {
-  padding: 5px !important;
-  text-align: center !important;
-}
+
 
 /* @settings
 name: Table Styling
@@ -41,32 +37,57 @@ id: table-styling
 settings:
   - id: center-all-cells
     title: Center all table cells
-    description: Enable or disable centering the content of all table cells
+    description: Horizontally centers the text in all table cells.
     type: class-toggle
     default: true
-  - id: header-column
-    title: Header Column
-    description: Enable or disable header column
-    type: class-toggle
-    default: false
+
   - id: full-width
     title: Full Width Table
-    description: Enable or disable full width table
+    description: Makes tables span the full width of the note.
     type: class-toggle
     default: true
+
+  - id: header-column
+    title: Header Column
+    description: Applies header styling to the first column of tables.
+    type: class-toggle
+    default: false
+
+  - id: zebra-striping
+    title: Zebra Striping
+    description: Adds alternating background colors to table rows for better readability.
+    type: class-toggle
+    default: false
+
+  - id: table-cell-padding
+    title: Table Cell Padding
+    description: Adjust the amount of space inside table cells.
+    type: variable-number-slider
+    min: 0
+    max: 25
+    step: 1
+    default: 5
+    format: px
+    variable: table-cell-padding
 */
 
-body.center-all-cells .markdown-preview-view table thead tbody td tr th,
-body.center-all-cells .markdown-rendered table thead tbody td tr th {
-  text-align: center;
+body.center-all-cells :is(.markdown-preview-view, .markdown-rendered) table :is(td, th) {
+  text-align: center !important;
 }
 
-body.header-column .markdown-preview-view table tr td:first-of-type,
-body.header-column .markdown-rendered table tr td:first-of-type {
-  background-color: var(--background-secondary);
+body.header-column :is(.markdown-preview-view, .markdown-rendered) table tr :is(td:first-of-type) {
+  background-color: var(--background-secondary) !important;
 }
 
-body.full-width .markdown-source-view.mod-cm6 .cm-table-widget .table-wrapper,
-body.full-width :is(.markdown-rendered, .markdown-source-view.mod-cm6.is-live-preview) table {
-  width: 100%
+body.full-width :is(.markdown-source-view.mod-cm6 .cm-table-widget .table-wrapper,
+  :is(.markdown-rendered, .markdown-source-view.mod-cm6.is-live-preview) table) {
+  width: 100% !important;
+}
+
+body.zebra-striping :is(.markdown-preview-view, .markdown-rendered) table tr:nth-of-type(even) {
+  background-color: var(--background-primary-alt) !important;
+}
+
+:is(.markdown-preview-view, .markdown-rendered) table :is(td, th) {
+  padding: var(--table-cell-padding) !important;
 }
